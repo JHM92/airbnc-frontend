@@ -1,26 +1,21 @@
 import React from "react";
+import { useState } from "react";
 import PropertyCard from "./PropertyCard";
-const propertyObjects = [
-  {
-    name: "Cosy Loft in the Heart of the City",
-    location: "Manchester, UK",
-    price: "130",
-    image: "",
-  },
-];
-export default function PropertyGrid() {
+
+export default function PropertyGrid({ properties }) {
   return (
     <div className="properties-grid">
-      {propertyObjects.map((property) => {
-        return (
-          <PropertyCard
-            name={property.name}
-            location={property.location}
-            price={property.price}
-            image={property.image}
-          />
-        );
-      })}
+      {typeof properties !== "undefined" &&
+        properties.map((property) => {
+          return (
+            <PropertyCard
+              name={property.property_name}
+              location={property.location}
+              price={property.price_per_night}
+              image={property.image_url}
+            />
+          );
+        })}
     </div>
   );
 }

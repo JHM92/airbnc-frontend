@@ -10,7 +10,7 @@ export default function PropertyCard({ name, location, price, image }) {
       <div className="property-card-name">{name}</div>
       <div className="property-card-details-wrapper">
         <div className="property-card-location">{location}</div>
-        <div className="property-card-price">£{price}</div>
+        <div className="property-card-price">£{price} per night</div>
       </div>
     </div>
   );
