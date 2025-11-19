@@ -133,3 +133,53 @@ select {
   background-color: inherit;
   border: 0;
 }
+
+.properties-grid {
+  margin: 3vh 12%;
+
+  border-radius: 5px;
+  padding: 1vh 0;
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: flex-start;
+  align-content: flex-end;
+}
+
+.property-card {
+  border: 3px double var(--light-blue);
+  border-radius: 5px;
+  margin: 1% 1%;
+  width: 300px;
+  height: 250px;
+  display: flex;
+  flex-direction: column;
+  background-color: var(--almond);
+}
+
+.property-card-image {
+  margin: 0;
+  width: 100%;
+  height: 80%;
+}
+
+.property-card-details-wrapper {
+  margin-top: 3%;
+  display: flex;
+  justify-content: space-between;
+}
+
+.property-card-name {
+  margin: 1% 0 0 2%;
+  text-align: left;
+  font-weight: bold;
+}
+
+.property-card-location {
+  margin-left: 2%;
+  font-size: 0.9rem;
+}
+
+.property-card-price {
+  margin-right: 2%;
+  color: var(--dark-blue);
+}
