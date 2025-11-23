@@ -254,6 +254,14 @@ a {
   border-radius: 5px;
 }
 
+.empty-card {
+  width: 240px;
+  height: 180px;
+  border: double 3px var(--light-blue);
+  border-radius: 5px;
+  background-color: var(--light-blue);
+}
+
 .detail-card-emphasis {
   color: var(--dark-blue);
   font-size: 3.5rem;
