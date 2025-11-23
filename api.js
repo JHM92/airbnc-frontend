@@ -6,3 +6,17 @@ export const getProperties = async () => {
   } = await axios.get("https://airbnc-cm8h.onrender.com/api/properties/");
   return properties;
 };
+
+export const getPropertyById = async (property_id) => {
+  const {
+    data: { property },
+  } = await axios.get(`https://airbnc-cm8h.onrender.com/api/properties/${property_id}`);
+  return property;
+};
+
+export const getReviewsById = async (property_id) => {
+  const { data: reviewsData } = await axios.get(
+    `https://airbnc-cm8h.onrender.com/api/properties/${property_id}/reviews`
+  );
+  return reviewsData;
+};
