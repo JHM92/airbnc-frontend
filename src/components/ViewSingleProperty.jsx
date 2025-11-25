@@ -1,13 +1,16 @@
 import { useParams } from "react-router";
 import { useState, useEffect } from "react";
-import { getPropertyById, getReviewsById } from "../../api";
+import { getPropertyById, getReviewsById, getPropertiesByHostId } from "../../api";
 import PropertyDetails from "./PropertyDetails";
 import ReviewHeader from "./ReviewHeader";
 import Review from "./Review";
+import PropertyGrid from "./PropertyGrid";
 
 export default function ViewSingleProperty() {
   const [property, setProperty] = useState();
   const [reviews, setReviews] = useState();
+  const [hostId, setHostId] = useState(null);
+  const [otherProperties, setOtherProperties] = useState();
   const [isLoading, setIsLoading] = useState(true);
   let dateString = "";
 
@@ -15,6 +18,7 @@ export default function ViewSingleProperty() {
   const fetchPropertyById = async () => {
     const retrievedProperty = await getPropertyById(property_id);
     setProperty(retrievedProperty);
+    setHostId(retrievedProperty.host_id);
   };
 
   const fetchReviewsById = async () => {
@@ -22,11 +26,23 @@ export default function ViewSingleProperty() {
     setReviews(retrievedReviews);
   };
 
+  const fetchHostsOtherProperties = async (host_id) => {
+    const { properties: retrievedProperties } = await getPropertiesByHostId(host_id);
+    const filteredProperties = retrievedProperties.filter((property) => {
+      return property.property_id !== Number(property_id);
+    });
+    setOtherProperties(filteredProperties);
+  };
+
   useEffect(() => {
     fetchPropertyById();
     fetchReviewsById();
+    if (hostId !== null) {
+      fetchHostsOtherProperties(hostId);
+    }
+
     setIsLoading(false);
-  }, []);
+  }, [hostId]);
 
   if (reviews?.average_rating !== "No Ratings") {
     dateString = new Date(reviews?.reviews[0].created_at).toLocaleString("en-US", {
@@ -35,8 +51,10 @@ export default function ViewSingleProperty() {
       year: "numeric",
     });
   }
-
-  console.log(dateString);
+  if (property?.host_id !== undefined && hostId === null) {
+    const id = property.host_id;
+    setHostId(id);
+  }
 
   return (
     <div className="view-single-property-page-container">
@@ -75,9 +93,17 @@ export default function ViewSingleProperty() {
           />
         </div>
       ) : (
-        <>Be the first to review this property!</>
+        <div>Be the first to review this property!</div>
       )}
-      <div className="view-single-property-other-properties">Other Properties from Host</div>
+
+      <hr />
+      <br />
+      <br />
+
+      <div className="view-host-other-properties">
+        <div className="other-properties-heading">Other Properties From Host</div>
+        <PropertyGrid properties={otherProperties} />
+      </div>
     </div>
   );
 }

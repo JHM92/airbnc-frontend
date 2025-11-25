@@ -382,3 +382,8 @@ hr {
   font-size: 3rem;
   color: var(--dark-blue);
 }
+
+.other-properties-heading {
+  font-size: 1.2rem;
+  font-weight: bold;
+}

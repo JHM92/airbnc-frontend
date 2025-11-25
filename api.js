@@ -20,3 +20,10 @@ export const getReviewsById = async (property_id) => {
   );
   return reviewsData;
 };
+
+export const getPropertiesByHostId = async (host_id) => {
+  const { data: properties } = await axios.get(
+    `https://airbnc-cm8h.onrender.com/api/properties?host=${host_id}`
+  );
+  return properties;
+};
