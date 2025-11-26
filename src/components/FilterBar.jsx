@@ -36,7 +36,7 @@ export default function FilterBar() {
 
       <div className="filter-search-wrapper">
         <button className="filter-bar-button" type="button">
-          <img src="src/assets/search-logo.png" alt="" />
+          <img src="src/assets/search-logo-blue.png" alt="" />
         </button>
       </div>
     </form>

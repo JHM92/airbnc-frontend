@@ -8,6 +8,7 @@ import PropertyGrid from "./PropertyGrid";
 
 export default function ViewSingleProperty() {
   const [property, setProperty] = useState();
+
   const [reviews, setReviews] = useState();
   const [hostId, setHostId] = useState(null);
   const [otherProperties, setOtherProperties] = useState();
@@ -15,6 +16,7 @@ export default function ViewSingleProperty() {
   let dateString = "";
 
   const { property_id } = useParams();
+
   const fetchPropertyById = async () => {
     const retrievedProperty = await getPropertyById(property_id);
     setProperty(retrievedProperty);
@@ -42,7 +44,7 @@ export default function ViewSingleProperty() {
     }
 
     setIsLoading(false);
-  }, [hostId]);
+  }, [property_id, hostId]);
 
   if (reviews?.average_rating !== "No Ratings") {
     dateString = new Date(reviews?.reviews[0].created_at).toLocaleString("en-US", {

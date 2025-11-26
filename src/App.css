@@ -77,8 +77,8 @@ body {
   margin: 2% 25%;
   padding: 0;
   height: 5%;
-  background-color: var(--almond);
-  border: 1px solid var(--orange);
+  background-color: var(--light-blue);
+  border: 1px solid var(--dark-blue);
   border-radius: 10vh;
 }
 
