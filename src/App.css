@@ -307,7 +307,8 @@ hr {
 .view-single-property-reviews-container {
   margin: 5vh 10vw;
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
+  column-gap: 15%;
 }
 
 .review-header {
