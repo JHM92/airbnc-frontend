@@ -7,12 +7,13 @@ import { getProperties } from "../../api";
 
 export default function ViewProperties() {
   const [properties, setProperties] = useState();
+  const [filter, setFilter] = useState("");
   const [isLoading, setIsLoading] = useState(true);
   const [hasErrored, setHasErrored] = useState(null);
 
   const fetchProperties = async () => {
     try {
-      const properties = await getProperties();
+      const properties = await getProperties(filter);
       setProperties(properties);
       setIsLoading(false);
     } catch (err) {
@@ -22,13 +23,17 @@ export default function ViewProperties() {
     }
   };
 
+  const updateFilter = (filter) => {
+    setFilter(filter);
+  };
+
   useEffect(() => {
     fetchProperties();
-  }, []);
+  }, [filter]);
 
   return (
     <div className="view-properties-container">
-      <FilterBar />
+      <FilterBar updateFilter={updateFilter} />
       {isLoading ? <p>Loading...</p> : <PropertyGrid properties={properties} />}
       {hasErrored ? <p>Error: {hasErrored.message}</p> : <></>}
     </div>

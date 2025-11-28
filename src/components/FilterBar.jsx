@@ -1,15 +1,79 @@
-import React from "react";
+import React, { useState } from "react";
 import CheckboxOption from "./CheckboxOption";
+import { getProperties } from "../../api";
 
-export default function FilterBar() {
+export default function FilterBar({ updateFilter }) {
+  const [propertyTypeInput, setPropertyTypeInput] = useState({
+    house: false,
+    apartment: false,
+    studio: false,
+  });
+
+  const handleFilterSubmit = () => {
+    const filters = [];
+    let filter = "";
+    for (const propertyType in propertyTypeInput) {
+      if (propertyTypeInput[propertyType]) {
+        filters.push([
+          "property_type",
+          propertyType[0].toUpperCase() + propertyType.slice(1).toLocaleLowerCase(),
+        ]);
+      }
+    }
+
+    if (filters.length > 0) {
+      const filterStrings = filters.map((filter) => {
+        return filter.join("=");
+      });
+
+      filter = "?" + filterStrings.join("&&");
+    }
+
+    updateFilter(filter);
+  };
+
+  const handlePropertyTypeChange = (e) => {
+    if (e.target.id === "property-type-house") {
+      setPropertyTypeInput({
+        house: !propertyTypeInput.house,
+        apartment: propertyTypeInput.apartment,
+        studio: propertyTypeInput.studio,
+      });
+    } else if (e.target.id === "property-type-apartment") {
+      setPropertyTypeInput({
+        house: propertyTypeInput.house,
+        apartment: !propertyTypeInput.apartment,
+        studio: propertyTypeInput.studio,
+      });
+    } else if (e.target.id === "property-type-studio") {
+      setPropertyTypeInput({
+        house: propertyTypeInput.house,
+        apartment: propertyTypeInput.apartment,
+        studio: !propertyTypeInput.studio,
+      });
+    }
+  };
+
   return (
     <form className="filter-bar">
       <div className="property-types-wrapper">
         <div>Property Types</div>
         <div className="property-type-options">
-          <CheckboxOption prompt="property-type" option="house" />
-          <CheckboxOption prompt="property-type" option="apartment" />
-          <CheckboxOption prompt="property-type" option="studio" />
+          <CheckboxOption
+            prompt="property-type"
+            option="house"
+            handlePropertyTypeChange={handlePropertyTypeChange}
+          />
+          <CheckboxOption
+            prompt="property-type"
+            option="apartment"
+            handlePropertyTypeChange={handlePropertyTypeChange}
+          />
+          <CheckboxOption
+            prompt="property-type"
+            option="studio"
+            handlePropertyTypeChange={handlePropertyTypeChange}
+          />
         </div>
       </div>
 
@@ -35,7 +99,7 @@ export default function FilterBar() {
       </div>
 
       <div className="filter-search-wrapper">
-        <button className="filter-bar-button" type="button">
+        <button className="filter-bar-button" type="button" onClick={handleFilterSubmit}>
           <img src="src/assets/search-logo-blue.png" alt="" />
         </button>
       </div>
