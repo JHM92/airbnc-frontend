@@ -10,7 +10,7 @@ export default function ViewSingleProperty() {
   const [property, setProperty] = useState();
 
   const [reviews, setReviews] = useState();
-  const [hostId, setHostId] = useState(null);
+
   const [otherProperties, setOtherProperties] = useState();
   const [isLoading, setIsLoading] = useState(true);
   let dateString = "";
@@ -20,7 +20,8 @@ export default function ViewSingleProperty() {
   const fetchPropertyById = async () => {
     const retrievedProperty = await getPropertyById(property_id);
     setProperty(retrievedProperty);
-    setHostId(retrievedProperty.host_id);
+
+    return retrievedProperty.host_id;
   };
 
   const fetchReviewsById = async () => {
@@ -34,17 +35,15 @@ export default function ViewSingleProperty() {
       return property.property_id !== Number(property_id);
     });
     setOtherProperties(filteredProperties);
+    setIsLoading(false);
   };
 
   useEffect(() => {
-    fetchPropertyById();
-    fetchReviewsById();
-    if (hostId !== null) {
-      fetchHostsOtherProperties(hostId);
-    }
-
-    setIsLoading(false);
-  }, [property_id, hostId]);
+    setIsLoading(true);
+    Promise.all([fetchReviewsById(), fetchPropertyById()]).then(([_, host_id]) => {
+      fetchHostsOtherProperties(host_id);
+    });
+  }, [property_id]);
 
   if (reviews?.average_rating !== "No Ratings") {
     dateString = new Date(reviews?.reviews[0].created_at).toLocaleString("en-US", {
@@ -53,59 +52,58 @@ export default function ViewSingleProperty() {
       year: "numeric",
     });
   }
-  if (property?.host_id !== undefined && hostId === null) {
-    const id = property.host_id;
-    setHostId(id);
-  }
 
   return (
     <div className="view-single-property-page-container">
       {isLoading ? (
         <p>Loading...</p>
       ) : (
-        <PropertyDetails property={property} reviews={reviews} isLoading={isLoading} />
-      )}
-      <br />
-      <br />
-      <hr />
+        <>
+          <PropertyDetails property={property} reviews={reviews} isLoading={isLoading} />
 
-      {reviews?.reviews.length > 0 ? (
-        <div className="view-single-property-reviews-container">
-          <div className="review-container">
-            <ReviewHeader
-              guest={reviews?.reviews[0].guest}
-              guest_avatar={reviews?.reviews[0].guest_avatar}
-              date={dateString}
-            />
-            <div className="review-comment">
-              <span className="quote-marks-opening">“</span>
-              {reviews?.reviews[0].comment}
-              <span className="quote-marks-closing">”</span>
+          <br />
+          <br />
+          <hr />
+
+          {reviews?.reviews.length > 0 ? (
+            <div className="view-single-property-reviews-container">
+              <div className="review-container">
+                <ReviewHeader
+                  guest={reviews?.reviews[0].guest}
+                  guest_avatar={reviews?.reviews[0].guest_avatar}
+                  date={dateString}
+                />
+                <div className="review-comment">
+                  <span className="quote-marks-opening">“</span>
+                  {reviews?.reviews[0].comment}
+                  <span className="quote-marks-closing">”</span>
+                </div>
+
+                <div className="review-rating">*****</div>
+              </div>
+
+              <Review
+                guest={reviews?.reviews[0].guest}
+                guest_avatar={reviews?.reviews[0].guest_avatar}
+                date={dateString}
+                comment={reviews?.reviews[0].comment}
+                rating={reviews?.reviews[0].rating}
+              />
             </div>
+          ) : (
+            <div>Be the first to review this property!</div>
+          )}
 
-            <div className="review-rating">*****</div>
+          <hr />
+          <br />
+          <br />
+
+          <div className="view-host-other-properties">
+            <div className="other-properties-heading">Other Properties From Host</div>
+            <PropertyGrid properties={otherProperties} />
           </div>
-
-          <Review
-            guest={reviews?.reviews[0].guest}
-            guest_avatar={reviews?.reviews[0].guest_avatar}
-            date={dateString}
-            comment={reviews?.reviews[0].comment}
-            rating={reviews?.reviews[0].rating}
-          />
-        </div>
-      ) : (
-        <div>Be the first to review this property!</div>
+        </>
       )}
-
-      <hr />
-      <br />
-      <br />
-
-      <div className="view-host-other-properties">
-        <div className="other-properties-heading">Other Properties From Host</div>
-        <PropertyGrid properties={otherProperties} />
-      </div>
     </div>
   );
 }
