@@ -9,6 +9,8 @@ export default function FilterBar({ updateFilter }) {
     studio: false,
   });
 
+  const [sortByInput, setSortByInput] = useState("popularity-descending");
+
   const handleFilterSubmit = () => {
     const filters = [];
     let filter = "";
@@ -19,6 +21,28 @@ export default function FilterBar({ updateFilter }) {
           propertyType[0].toUpperCase() + propertyType.slice(1).toLocaleLowerCase(),
         ]);
       }
+    }
+
+    switch (sortByInput) {
+      case "popularity-descending":
+        filters.push(["sort", "popularity"]);
+        filters.push(["order", "descending"]);
+        break;
+
+      case "popularity-ascending":
+        filters.push(["sort", "popularity"]);
+        filters.push(["order", "ascending"]);
+        break;
+
+      case "price-descending":
+        filters.push(["sort", "cost_per_night"]);
+        filters.push(["order", "descending"]);
+        break;
+
+      case "price-ascending":
+        filters.push(["sort", "cost_per_night"]);
+        filters.push(["order", "ascending"]);
+        break;
     }
 
     if (filters.length > 0) {
@@ -54,6 +78,10 @@ export default function FilterBar({ updateFilter }) {
     }
   };
 
+  const handleSortByChange = (e) => {
+    setSortByInput(e.target.value);
+  };
+
   return (
     <form className="filter-bar">
       <div className="property-types-wrapper">
@@ -79,7 +107,7 @@ export default function FilterBar({ updateFilter }) {
 
       <div className="sort-by-wrapper">
         <label htmlFor="sort-by">Sort By</label>
-        <select name="sort-by" id="sort-by">
+        <select name="sort-by" id="sort-by" onChange={handleSortByChange}>
           <option value="popularity-descending">Popularity: High to Low</option>
           <option value="popularity-ascending">Popularity: Low to High</option>
           <option value="price-descending">Price: High to Low</option>
