@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useSearchParams } from "react-router";
 import CheckboxOption from "./CheckboxOption";
 import { getProperties } from "../../api";
 
@@ -10,10 +11,16 @@ export default function FilterBar({ updateFilter }) {
   });
 
   const [sortByInput, setSortByInput] = useState("popularity-descending");
+  const [minPriceInput, setMinPriceInput] = useState();
+  const [maxPriceInput, setMaxPriceInput] = useState();
+  const [searchParams, setSearchParams] = useSearchParams();
 
   const handleFilterSubmit = () => {
     const filters = [];
+
     let filter = "";
+
+    // Property Types filter
     for (const propertyType in propertyTypeInput) {
       if (propertyTypeInput[propertyType]) {
         filters.push([
@@ -23,6 +30,7 @@ export default function FilterBar({ updateFilter }) {
       }
     }
 
+    // Sort & Order filter
     switch (sortByInput) {
       case "popularity-descending":
         filters.push(["sort", "popularity"]);
@@ -45,12 +53,22 @@ export default function FilterBar({ updateFilter }) {
         break;
     }
 
+    // Max & Min Price filters
+    if (minPriceInput !== "") {
+      filters.push(["minprice", minPriceInput]);
+    }
+
+    if (maxPriceInput !== "") {
+      filters.push(["maxprice", maxPriceInput]);
+    }
+
     if (filters.length > 0) {
       const filterStrings = filters.map((filter) => {
         return filter.join("=");
       });
 
-      filter = "?" + filterStrings.join("&&");
+      filter = "?" + filterStrings.join("&");
+      setSearchParams(filter);
     }
 
     updateFilter(filter);
@@ -80,6 +98,14 @@ export default function FilterBar({ updateFilter }) {
 
   const handleSortByChange = (e) => {
     setSortByInput(e.target.value);
+  };
+
+  const handleMinPriceChange = (e) => {
+    setMinPriceInput(e.target.value);
+  };
+
+  const handleMaxPriceChange = (e) => {
+    setMaxPriceInput(e.target.value);
   };
 
   return (
@@ -117,12 +143,24 @@ export default function FilterBar({ updateFilter }) {
 
       <div className="price-range-wrapper">
         <div className="filter-min-price">
-          <label htmlFor="min-price">Minimum Price:</label>
-          <input className="price-input" type="text" id="min-price" name="min-price" />
+          <label htmlFor="min-price">Minimum Price: £</label>
+          <input
+            className="price-input"
+            type="text"
+            id="min-price"
+            name="min-price"
+            onChange={handleMinPriceChange}
+          />
         </div>
         <div className="filter-max-price">
-          <label htmlFor="max-price">Maximum Price:</label>
-          <input className="price-input" type="text" id="max-price" name="max-price" />
+          <label htmlFor="max-price">Maximum Price: £</label>
+          <input
+            className="price-input"
+            type="text"
+            id="max-price"
+            name="max-price"
+            onChange={handleMaxPriceChange}
+          />
         </div>
       </div>
 
