@@ -28,3 +28,9 @@ export const getPropertiesByHostId = async (host_id) => {
   );
   return properties;
 };
+
+export const getUserById = async (user_id) => {
+  const { data } = await axios.get(`https://airbnc-cm8h.onrender.com/api/users/${user_id}`);
+
+  return data;
+};

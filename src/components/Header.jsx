@@ -1,7 +1,7 @@
 import { Link } from "react-router";
 import airbncLogo from "../assets/airbnc-logo.png";
 import defaultAvatar from "../assets/default-avatar.png";
-export default function Header() {
+export default function Header({ user }) {
   return (
     <header className="header">
       <Link to="/" style={{ display: "contents" }}>
@@ -14,9 +14,9 @@ export default function Header() {
       <div className="header-user">
         <div className="header-welcome">
           Welcome,
-          <br /> Guest
+          <br /> {user.first_name}
         </div>
-        <img className="header-avatar" src={defaultAvatar} alt="" />
+        <img className="header-avatar" src={user.avatar} alt="" />
       </div>
     </header>
   );

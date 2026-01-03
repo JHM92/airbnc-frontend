@@ -21,22 +21,30 @@ export default function Reviews({ reviews }) {
   }
 
   return (
-    <div className="view-single-property-reviews-container">
-      {displayedReviews.length > 0 ? (
-        displayedReviews.map((review) => {
-          return (
-            <Review
-              guest={review.guest}
-              guest_avatar={review.guest_avatar}
-              date={review.dateString}
-              comment={review.comment}
-              rating={review.rating}
-            />
-          );
-        })
-      ) : (
-        <div>Be the first to review this property!</div>
-      )}
-    </div>
+    <>
+      <div className="view-single-property-reviews-container">
+        {displayedReviews.length > 0 ? (
+          displayedReviews.map((review) => {
+            return (
+              <Review
+                guest={review.guest}
+                guest_avatar={review.guest_avatar}
+                date={review.dateString}
+                comment={review.comment}
+                rating={review.rating}
+              />
+            );
+          })
+        ) : (
+          <div className="no-reviews">Be the first to review this property!</div>
+        )}
+      </div>
+      <div className="add-review-container">
+        Add a Review?
+        <button className="review-button">
+          <img className="write-review-icon" src="../src/assets/write-review.png" alt="" />
+        </button>
+      </div>
+    </>
   );
 }

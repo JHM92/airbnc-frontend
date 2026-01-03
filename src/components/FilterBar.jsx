@@ -54,11 +54,11 @@ export default function FilterBar({ updateFilter }) {
     }
 
     // Max & Min Price filters
-    if (minPriceInput !== "") {
+    if (minPriceInput) {
       filters.push(["minprice", minPriceInput]);
     }
 
-    if (maxPriceInput !== "") {
+    if (maxPriceInput) {
       filters.push(["maxprice", maxPriceInput]);
     }
 
