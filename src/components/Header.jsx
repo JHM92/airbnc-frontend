@@ -14,9 +14,9 @@ export default function Header({ user }) {
       <div className="header-user">
         <div className="header-welcome">
           Welcome,
-          <br /> {user.first_name}
+          <br /> {user?.first_name}
         </div>
-        <img className="header-avatar" src={user.avatar} alt="" />
+        <img className="header-avatar" src={user?.avatar} alt="" />
       </div>
     </header>
   );

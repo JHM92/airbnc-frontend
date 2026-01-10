@@ -6,6 +6,7 @@ import ReviewHeader from "./ReviewHeader";
 import Review from "./Review";
 import Reviews from "./Reviews";
 import PropertyGrid from "./PropertyGrid";
+import Modal from "./Modal";
 
 export default function ViewSingleProperty() {
   const [property, setProperty] = useState();
