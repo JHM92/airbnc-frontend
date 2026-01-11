@@ -5,7 +5,7 @@ import axios from "axios";
 import { useState, useEffect } from "react";
 import { getProperties } from "../../api";
 
-export default function ViewProperties() {
+export default function ViewProperties({ user }) {
   const [properties, setProperties] = useState();
   const [filter, setFilter] = useState("");
   const [isLoading, setIsLoading] = useState(true);

@@ -8,7 +8,7 @@ import Reviews from "./Reviews";
 import PropertyGrid from "./PropertyGrid";
 import Modal from "./Modal";
 
-export default function ViewSingleProperty() {
+export default function ViewSingleProperty({ user }) {
   const [property, setProperty] = useState();
 
   const [reviews, setReviews] = useState();
@@ -67,7 +67,7 @@ export default function ViewSingleProperty() {
           <br />
           <hr />
 
-          <Reviews reviews={reviews} />
+          <Reviews reviews={reviews} property_id={property_id} user={user} />
 
           <hr />
           <br />

@@ -490,10 +490,47 @@ hr {
   width: inherit;
   display: flex;
   justify-content: center;
+  margin-bottom: 10px;
 }
 
 #write-review-text {
   margin-top: 5px;
   border: double 3px var(--light-blue);
   resize: none;
+}
+
+.submit-review-button {
+  display: block;
+
+  background-color: var(--light-blue);
+  border: double 3px var(--light-blue);
+  border-radius: 5px;
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 100px;
+  margin-top: 10px;
+  padding: 10px;
+}
+
+.submit-review-button:hover {
+  border-color: white;
+}
+
+.submit-review-button:active {
+  color: #fff;
+}
+
+#rating-warning {
+  color: red;
+  display: none;
+}
+
+#review-message-warning {
+  display: none;
+  color: red;
+}
+
+#successful-post-message {
+  display: none;
+  color: green;
 }

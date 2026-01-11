@@ -22,8 +22,8 @@ function App() {
     <>
       <Header user={user} />
       <Routes>
-        <Route path="/" element={<ViewProperties />} />
-        <Route path="properties/:property_id" element={<ViewSingleProperty />} />
+        <Route path="/" element={<ViewProperties user={user} />} />
+        <Route path="properties/:property_id" element={<ViewSingleProperty user={user} />} />
       </Routes>
     </>
   );

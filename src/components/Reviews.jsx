@@ -4,7 +4,7 @@ import { useState } from "react";
 import ReviewStars from "./ReviewStars";
 import ReviewForm from "./ReviewForm";
 
-export default function Reviews({ reviews }) {
+export default function Reviews({ reviews, user, property_id }) {
   const displayedReviews = [];
 
   const [writeReviewModalIsOpen, setWriteReviewModalIsOpen] = useState(false);
@@ -138,6 +138,7 @@ export default function Reviews({ reviews }) {
                 date={review.dateString}
                 comment={review.comment}
                 rating={review.rating}
+                user={user}
               />
             );
           })
@@ -167,6 +168,8 @@ export default function Reviews({ reviews }) {
             stars={stars}
             reviewMessage={reviewMessage}
             updateReviewMessage={updateReviewMessage}
+            user={user}
+            property_id={property_id}
           />
         </Modal>
       </div>

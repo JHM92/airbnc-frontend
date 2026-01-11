@@ -4,7 +4,7 @@ export const getProperties = async (optionalQuery) => {
   const {
     data: { properties },
   } = await axios.get(`https://airbnc-cm8h.onrender.com/api/properties/${optionalQuery}`);
-  console.log(properties);
+
   return properties;
 };
 
@@ -33,4 +33,19 @@ export const getUserById = async (user_id) => {
   const { data } = await axios.get(`https://airbnc-cm8h.onrender.com/api/users/${user_id}`);
 
   return data;
+};
+
+export const postPropertyReview = async (guest_id, rating, comment, property_id) => {
+  const payload = {
+    guest_id: guest_id,
+    rating: rating,
+    comment: comment,
+  };
+
+  const res = await axios.post(
+    `https://airbnc-cm8h.onrender.com/api/properties/${property_id}/reviews`,
+    payload
+  );
+
+  return res;
 };
