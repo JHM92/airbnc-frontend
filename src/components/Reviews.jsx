@@ -1,13 +1,15 @@
 import Review from "./Review";
 import Modal from "./Modal";
 import { useState } from "react";
-import ReviewStars from "./ReviewStars";
 import ReviewForm from "./ReviewForm";
+import AllReviews from "./AllReviews";
 
 export default function Reviews({ reviews, user, property_id }) {
   const displayedReviews = [];
 
   const [writeReviewModalIsOpen, setWriteReviewModalIsOpen] = useState(false);
+  const [viewMoreReviewsModalIsOpen, setViewMoreReviewsModalIsOpen] = useState(false);
+
   const [stars, setStars] = useState({
     one: "star",
     two: "star",
@@ -129,7 +131,9 @@ export default function Reviews({ reviews, user, property_id }) {
   return (
     <>
       <div className="view-single-property-reviews-container">
-        {displayedReviews.length > 0 ? (
+        {displayedReviews.length === 0 ? (
+          <div className="no-reviews">Be the first to review this property!</div>
+        ) : (
           displayedReviews.map((review) => {
             return (
               <Review
@@ -142,10 +146,33 @@ export default function Reviews({ reviews, user, property_id }) {
               />
             );
           })
-        ) : (
-          <div className="no-reviews">Be the first to review this property!</div>
         )}
       </div>
+
+      {formattedReviews.length > 2 ? (
+        <div className="view-more-reviews-container">
+          <button
+            className="view-more-reviews"
+            onClick={(e) => {
+              setViewMoreReviewsModalIsOpen(true);
+              e.stopPropagation();
+            }}
+          >
+            More reviews
+          </button>
+          <Modal
+            open={viewMoreReviewsModalIsOpen}
+            onClose={() => {
+              setViewMoreReviewsModalIsOpen(false);
+            }}
+          >
+            <AllReviews reviews={formattedReviews} />
+          </Modal>
+        </div>
+      ) : (
+        <></>
+      )}
+
       <div className="add-review-container">
         Add a Review?
         <button

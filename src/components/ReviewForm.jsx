@@ -17,9 +17,8 @@ export default function ReviewForm({
   const handleSubmitReview = async () => {
     if (stars.rating !== null && reviewMessage !== "") {
       const res = await postPropertyReview(user.user_id, stars.rating, reviewMessage, property_id);
-      console.log(res);
+
       if (res.status === 201) {
-        console.log("!!!");
         const successMessage = document.getElementById("successful-post-message");
         successMessage.style = "display: block;";
       }

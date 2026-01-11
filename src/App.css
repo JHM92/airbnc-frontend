@@ -307,7 +307,10 @@ hr {
 }
 
 .view-single-property-reviews-container {
-  margin: 5vh 10vw;
+  margin-top: 5vh;
+  margin-bottom: 2vh;
+  margin-left: 10vw;
+  margin-right: 10vw;
   display: flex;
   justify-content: center;
   column-gap: 15%;
@@ -386,6 +389,14 @@ hr {
   color: var(--dark-blue);
 }
 
+.more-reviews-rating {
+  margin-top: 3%;
+  margin-bottom: 2%;
+  font-size: 3rem;
+  color: var(--dark-blue);
+  text-align: center;
+}
+
 .other-properties-heading {
   font-size: 1.2rem;
   font-weight: bold;
@@ -396,6 +407,23 @@ hr {
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+.view-more-reviews {
+  all: unset;
+  font-size: 0.9rem;
+  font-weight: bold;
+  width: 86%;
+  margin-bottom: 2%;
+  display: block;
+  text-align: end;
+}
+
+.view-more-reviews:hover {
+  text-decoration: underline;
+  text-decoration-thickness: 3px;
+  text-decoration-color: var(--light-blue);
+  cursor: pointer;
 }
 
 .review-button {
@@ -533,4 +561,22 @@ hr {
 #successful-post-message {
   display: none;
   color: green;
+}
+
+.all-reviews-container {
+  height: 400px;
+  overflow-y: scroll;
+  overflow-x: hidden;
+}
+
+.review-divider {
+  width: 50%;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 5%;
+}
+
+.review-divier-hr {
+  padding-left: 25%;
+  padding-right: 25%;
 }
