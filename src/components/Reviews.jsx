@@ -2,14 +2,22 @@ import Review from "./Review";
 import Modal from "./Modal";
 import { useState } from "react";
 import ReviewStars from "./ReviewStars";
+import ReviewForm from "./ReviewForm";
 
 export default function Reviews({ reviews }) {
   const displayedReviews = [];
 
   const [writeReviewModalIsOpen, setWriteReviewModalIsOpen] = useState(false);
-  const [writeReviewRating, setWriteReviewRating] = useState(0);
+  const [stars, setStars] = useState({
+    one: "star",
+    two: "star",
+    three: "star",
+    four: "star",
+    five: "star",
+    rating: null,
+  });
 
-  const stars = document.getElementsByClassName("star");
+  const [reviewMessage, setReviewMessage] = useState("");
 
   const formattedReviews = reviews.reviews.map((review) => {
     const dateString = new Date(review.created_at).toLocaleDateString("en-US", {
@@ -22,8 +30,6 @@ export default function Reviews({ reviews }) {
   });
 
   const selectStarRating = (rating) => {
-    setWriteReviewRating(rating);
-
     const oneStar = document.getElementById("one-star");
     const twoStar = document.getElementById("two-star");
     const threeStar = document.getElementById("three-star");
@@ -32,6 +38,14 @@ export default function Reviews({ reviews }) {
 
     switch (rating) {
       case 1:
+        setStars({
+          one: "star-filled",
+          two: "star",
+          three: "star",
+          four: "star",
+          five: "star",
+          rating: 1,
+        });
         oneStar.className = "star-filled";
         twoStar.className = "star";
         threeStar.className = "star";
@@ -39,6 +53,14 @@ export default function Reviews({ reviews }) {
         fiveStar.className = "star";
         break;
       case 2:
+        setStars({
+          one: "star-filled",
+          two: "star-filled",
+          three: "star",
+          four: "star",
+          five: "star",
+          rating: 2,
+        });
         oneStar.className = "star-filled";
         twoStar.className = "star-filled";
         threeStar.className = "star";
@@ -46,6 +68,14 @@ export default function Reviews({ reviews }) {
         fiveStar.className = "star";
         break;
       case 3:
+        setStars({
+          one: "star-filled",
+          two: "star-filled",
+          three: "star-filled",
+          four: "star",
+          five: "star",
+          rating: 3,
+        });
         oneStar.className = "star-filled";
         twoStar.className = "star-filled";
         threeStar.className = "star-filled";
@@ -53,6 +83,14 @@ export default function Reviews({ reviews }) {
         fiveStar.className = "star";
         break;
       case 4:
+        setStars({
+          one: "star-filled",
+          two: "star-filled",
+          three: "star-filled",
+          four: "star-filled",
+          five: "star",
+          rating: 4,
+        });
         oneStar.className = "star-filled";
         twoStar.className = "star-filled";
         threeStar.className = "star-filled";
@@ -60,6 +98,14 @@ export default function Reviews({ reviews }) {
         fiveStar.className = "star";
         break;
       case 5:
+        setStars({
+          one: "star-filled",
+          two: "star-filled",
+          three: "star-filled",
+          four: "star-filled",
+          five: "star-filled",
+          rating: 5,
+        });
         oneStar.className = "star-filled";
         twoStar.className = "star-filled";
         threeStar.className = "star-filled";
@@ -67,6 +113,10 @@ export default function Reviews({ reviews }) {
         fiveStar.className = "star-filled";
         break;
     }
+  };
+
+  const updateReviewMessage = (message) => {
+    setReviewMessage(message);
   };
 
   if (formattedReviews.length > 1) {
@@ -112,14 +162,12 @@ export default function Reviews({ reviews }) {
             setWriteReviewModalIsOpen(false);
           }}
         >
-          <div className="write-review-form">
-            <ReviewStars selectStarRating={selectStarRating} test={() => console.log("!!!")} />
-            {writeReviewRating}
-            <br />
-            <br />
-
-            <textarea id="write-review-text" name="write-review-text" rows="8" cols="50"></textarea>
-          </div>
+          <ReviewForm
+            selectStarRating={selectStarRating}
+            stars={stars}
+            reviewMessage={reviewMessage}
+            updateReviewMessage={updateReviewMessage}
+          />
         </Modal>
       </div>
     </>

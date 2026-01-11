@@ -1,13 +1,14 @@
 import React from "react";
 import starLogo from "../assets/star.png";
+import { useEffect } from "react";
 
-export default function ReviewStars({ selectStarRating, test }) {
+export default function ReviewStars({ selectStarRating, stars }) {
   return (
     <div className="review-stars-container">
       <img
         src={starLogo}
         alt=""
-        className="star"
+        className={stars.one}
         id="one-star"
         onClick={() => selectStarRating(1)}
       />
@@ -15,7 +16,7 @@ export default function ReviewStars({ selectStarRating, test }) {
       <img
         src={starLogo}
         alt=""
-        className="star"
+        className={stars.two}
         id="two-star"
         onClick={() => selectStarRating(2)}
       />
@@ -23,7 +24,7 @@ export default function ReviewStars({ selectStarRating, test }) {
       <img
         src={starLogo}
         alt=""
-        className="star"
+        className={stars.three}
         id="three-star"
         onClick={() => selectStarRating(3)}
       />
@@ -31,7 +32,7 @@ export default function ReviewStars({ selectStarRating, test }) {
       <img
         src={starLogo}
         alt=""
-        className="star"
+        className={stars.four}
         id="four-star"
         onClick={() => selectStarRating(4)}
       />
@@ -39,7 +40,7 @@ export default function ReviewStars({ selectStarRating, test }) {
       <img
         src={starLogo}
         alt=""
-        className="star"
+        className={stars.five}
         id="five-star"
         onClick={() => selectStarRating(5)}
       />
