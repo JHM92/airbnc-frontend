@@ -30,7 +30,7 @@ export default function PropertyDetailsCardGrid({
           {typeof rating !== "undefined" && (
             <DetailCard
               label="Rating"
-              emphasis={rating === "No Ratings" ? rating : rating + " / 5"}
+              emphasis={rating === "No Ratings" ? rating : rating.toFixed(2) + " / 5"}
             />
           )}
           {typeof images !== "undefined" && <ImageCard imageUrl={images[3]} />}

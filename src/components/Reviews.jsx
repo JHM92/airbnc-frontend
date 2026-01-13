@@ -197,6 +197,9 @@ export default function Reviews({ reviews, user, property_id }) {
             updateReviewMessage={updateReviewMessage}
             user={user}
             property_id={property_id}
+            onClose={() => {
+              setWriteReviewModalIsOpen(false);
+            }}
           />
         </Modal>
       </div>
