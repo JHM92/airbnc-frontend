@@ -49,3 +49,8 @@ export const postPropertyReview = async (guest_id, rating, comment, property_id)
 
   return res;
 };
+
+export const deleteReviewById = async (review_id) => {
+  const res = await axios.delete(`https://airbnc-cm8h.onrender.com/api/reviews/${review_id}`);
+  return res;
+};

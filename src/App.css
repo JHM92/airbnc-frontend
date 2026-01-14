@@ -2,7 +2,7 @@
   --main-bg-color: #edf6f9;
   --light-blue: #83c5be;
   --dark-blue: #006d77;
-  --orange: #e29578;
+  --red: rgb(206, 96, 96);
   --almond: #ffddd2;
 }
 
@@ -319,9 +319,26 @@ hr {
 .review-header {
   margin: 2%;
   display: flex;
-  justify-content: flex-start;
+  justify-content: space-between;
   align-items: center;
   width: 100%;
+}
+
+.review-header-user {
+  margin: 2%;
+  display: flex;
+  justify-content: flex-start;
+  column-gap: 2px;
+  width: 50%;
+  align-items: center;
+}
+
+.review-header-delete {
+  margin-right: 2%;
+}
+
+.delete-review-button {
+  border: none;
 }
 
 .review-container {
@@ -337,7 +354,6 @@ hr {
 .review-header-details {
   display: flex;
   flex-direction: column;
-
   margin-left: 3%;
 }
 
@@ -437,7 +453,6 @@ hr {
 }
 
 .review-button:hover {
-  background-color: none;
   border-color: white;
 }
 
@@ -618,6 +633,7 @@ hr {
   margin-top: 3%;
   margin-bottom: 3%;
 }
+
 .loader {
   border: 10px solid #fff;
   border-top: 10px solid var(--light-blue);
@@ -625,6 +641,53 @@ hr {
   width: 50px;
   height: 50px;
   animation: spin 2s linear infinite;
+}
+
+.confirm-delete-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 22vw;
+}
+
+.confirm-delete-message {
+  margin-top: 5%;
+  margin-bottom: 5%;
+}
+
+.confirm-delete-buttons-container {
+  width: 80%;
+  display: flex;
+  justify-content: space-around;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  padding-bottom: 10px;
+}
+.cancel-button {
+  background-color: var(--light-blue);
+  border: double 3px var(--light-blue);
+  border-radius: 5px;
+  width: 70px;
+  padding: 10px;
+}
+
+.cancel-button:hover {
+  border: double 3px #fff;
+  cursor: pointer;
+}
+
+.delete-button {
+  color: #fff;
+  background-color: var(--red);
+  border: double 3px var(--red);
+  border-radius: 5px;
+  width: 70px;
+  padding: 10px;
+}
+
+.delete-button:hover {
+  border: double 3px #fff;
+  cursor: pointer;
 }
 
 @keyframes spin {

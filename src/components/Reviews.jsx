@@ -4,7 +4,7 @@ import { useState } from "react";
 import ReviewForm from "./ReviewForm";
 import AllReviews from "./AllReviews";
 
-export default function Reviews({ reviews, user, property_id }) {
+export default function Reviews({ reviews, user, property_id, trackDeletedReviews }) {
   const displayedReviews = [];
 
   const [writeReviewModalIsOpen, setWriteReviewModalIsOpen] = useState(false);
@@ -139,10 +139,13 @@ export default function Reviews({ reviews, user, property_id }) {
               <Review
                 guest={review.guest}
                 guest_avatar={review.guest_avatar}
+                guest_id={review.guest_id}
                 date={review.dateString}
                 comment={review.comment}
                 rating={review.rating}
                 user={user}
+                review_id={review.review_id}
+                trackDeletedReviews={trackDeletedReviews}
               />
             );
           })
@@ -166,7 +169,11 @@ export default function Reviews({ reviews, user, property_id }) {
               setViewMoreReviewsModalIsOpen(false);
             }}
           >
-            <AllReviews reviews={formattedReviews} />
+            <AllReviews
+              reviews={formattedReviews}
+              user={user}
+              trackDeletedReviews={trackDeletedReviews}
+            />
           </Modal>
         </div>
       ) : (
