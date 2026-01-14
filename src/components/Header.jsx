@@ -16,7 +16,9 @@ export default function Header({ user }) {
           Welcome,
           <br /> {user?.first_name}
         </div>
-        <img className="header-avatar" src={user?.avatar} alt="" />
+        <Link to={"/users/" + user?.user_id}>
+          <img className="header-avatar" src={user?.avatar} alt="" />
+        </Link>
       </div>
     </header>
   );

@@ -690,6 +690,39 @@ hr {
   cursor: pointer;
 }
 
+.user-profile-container {
+  margin: 3vh 10vw;
+}
+
+.user-details-container {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+}
+
+.profile-picture-info-container {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  width: 45%;
+}
+
+.profile-picture {
+  border-radius: 50%;
+}
+
+.user-name {
+  font-weight: bold;
+  font-size: 2rem;
+  color: var(--dark-blue);
+}
+
+.contact-label {
+  padding-top: 4%;
+  color: var(--dark-blue);
+  font-weight: bold;
+}
+
 @keyframes spin {
   0% {
     transform: rotate(0deg);

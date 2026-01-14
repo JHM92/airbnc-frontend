@@ -3,6 +3,7 @@ import deleteLogo from "../assets/delete.png";
 import Modal from "./Modal";
 import warningLogo from "../assets/warning.png";
 import { deleteReviewById } from "../../api";
+import { Link } from "react-router";
 
 export default function ReviewHeader({
   guest,
@@ -16,10 +17,10 @@ export default function ReviewHeader({
   const [deleteReviewModalIsOpen, setDeleteReviewModalIsOpen] = useState(false);
 
   const handleDeleteReviewClick = async () => {
-    const res = await deleteReviewById(review_id);
     const loader = document.getElementById("delete-review-loader");
     loader.className = "loader";
 
+    const res = await deleteReviewById(review_id);
     if (res.status === 204) {
       trackDeletedReviews();
       setDeleteReviewModalIsOpen(false);
@@ -29,7 +30,9 @@ export default function ReviewHeader({
   return (
     <div className="review-header">
       <div className="review-header-user">
-        <img className="review-avatar" src={guest_avatar} height="50px" width="50px" />
+        <Link to={"/users/" + guest_id}>
+          <img className="review-avatar" src={guest_avatar} height="50px" width="50px" />
+        </Link>
         <div className="review-header-details">
           <div className="review-guest-name">{guest}</div>
           <div className="review-date">{date}</div>

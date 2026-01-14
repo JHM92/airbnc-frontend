@@ -10,7 +10,11 @@ export default function PropertyDetails({ property, reviews }) {
           <h1 className="view-single-property-name">{property?.property_name}</h1>
           <span className="view-single-property-location">{property?.location}</span>
         </div>
-        <HostedBy hostName={property?.host} hostAvatar={property?.host_avatar} />
+        <HostedBy
+          hostName={property?.host}
+          hostAvatar={property?.host_avatar}
+          host_id={property?.host_id}
+        />
       </div>
       <div className="view-single-property-description">
         <hr /> {property?.description}
