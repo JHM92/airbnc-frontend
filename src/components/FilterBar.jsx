@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useSearchParams } from "react-router";
 import CheckboxOption from "./CheckboxOption";
 import { getProperties } from "../../api";
+import searchIcon from "../assets/search-logo.png";
 
 export default function FilterBar({ updateFilter }) {
   const [propertyTypeInput, setPropertyTypeInput] = useState({
@@ -166,7 +167,7 @@ export default function FilterBar({ updateFilter }) {
 
       <div className="filter-search-wrapper">
         <button className="filter-bar-button" type="button" onClick={handleFilterSubmit}>
-          <img src="src/assets/search-logo-blue.png" alt="" />
+          <img src={searchIcon} alt="" />
         </button>
       </div>
     </form>

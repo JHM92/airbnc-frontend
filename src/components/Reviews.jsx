@@ -3,6 +3,7 @@ import Modal from "./Modal";
 import { useState } from "react";
 import ReviewForm from "./ReviewForm";
 import AllReviews from "./AllReviews";
+import writeReviewIcon from "../assets/write-review.png";
 
 export default function Reviews({ reviews, user, property_id, trackDeletedReviews }) {
   const displayedReviews = [];
@@ -189,7 +190,7 @@ export default function Reviews({ reviews, user, property_id, trackDeletedReview
             e.stopPropagation();
           }}
         >
-          <img className="write-review-icon" src="../src/assets/write-review.png" alt="" />
+          <img className="write-review-icon" src={writeReviewIcon} alt="" />
         </button>
         <Modal
           open={writeReviewModalIsOpen}
