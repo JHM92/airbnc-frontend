@@ -1,0 +1,43 @@
+:root {
+  --main-bg-color: #edf6f9;
+  --light-blue: #83c5be;
+  --dark-blue: #006d77;
+  --red: rgb(206, 96, 96);
+  --almond: #ffddd2;
+}
+
+.container {
+  position: relative;
+}
+
+.label {
+  position: absolute;
+  color: var(--dark-blue);
+  left: 6px;
+  top: 8px;
+  pointer-events: none;
+  transition: 0.2s ease;
+}
+
+.input {
+  width: attr(data-width px, 300px);
+  height: 26px;
+  border-radius: 5px;
+  padding: 0 5px;
+  border: 3px double var(--light-blue);
+}
+
+.input:focus {
+  outline: none;
+  border: 3px solid var(--light-blue);
+}
+
+.input:focus + .label,
+.input:not(:placeholder-shown) + .label {
+  font-size: 0.7rem;
+  font-weight: bold;
+  position: absolute;
+  left: 5px;
+  top: -8px;
+  background: #fff;
+}

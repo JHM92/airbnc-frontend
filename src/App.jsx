@@ -25,7 +25,7 @@ function App() {
       <Routes>
         <Route path="/" element={<ViewProperties user={user} />} />
         <Route path="properties/:property_id" element={<ViewSingleProperty user={user} />} />
-        <Route path="users/:user_id" element={<UserProfile />} />
+        <Route path="users/:user_id" element={<UserProfile loggedInUser={user} />} />
       </Routes>
     </>
   );

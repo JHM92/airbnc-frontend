@@ -42,7 +42,7 @@ export default function ReviewHeader({
         {user?.user_id === guest_id ? (
           <>
             <button
-              className="delete-review-button"
+              className="icon-button"
               onClick={(e) => {
                 setDeleteReviewModalIsOpen(true);
                 e.stopPropagation();

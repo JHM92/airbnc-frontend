@@ -54,3 +54,9 @@ export const deleteReviewById = async (review_id) => {
   const res = await axios.delete(`https://airbnc-cm8h.onrender.com/api/reviews/${review_id}`);
   return res;
 };
+
+export const patchUserDetails = async (user_id, details) => {
+  console.log(details);
+  const res = await axios.patch(`https://airbnc-cm8h.onrender.com/api/users/${user_id}`, details);
+  return res;
+};

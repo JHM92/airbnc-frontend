@@ -337,7 +337,7 @@ hr {
   margin-right: 2%;
 }
 
-.delete-review-button {
+.icon-button {
   border: none;
 }
 
@@ -718,9 +718,44 @@ hr {
 }
 
 .contact-label {
+  display: flex;
+  justify-content: space-between;
   padding-top: 4%;
   color: var(--dark-blue);
   font-weight: bold;
+}
+
+.update-user-details-modal {
+  width: 20vw;
+}
+
+.edit-details-container {
+  height: 150px;
+  display: flex;
+  flex-direction: column;
+  row-gap: 10%;
+  align-items: center;
+}
+
+.confirm-update-buttons-container {
+  margin-top: 10%;
+  margin-bottom: 3%;
+  display: flex;
+  justify-content: center;
+  column-gap: 10%;
+}
+
+.submit-updated-details-button {
+  background-color: #fff;
+  color: var(--dark-blue);
+  border: double 3px var(--light-blue);
+  border-radius: 5px;
+  width: 70px;
+  padding: 10px;
+}
+
+.submit-updated-details-button:hover {
+  border: solid 2px var(--light-blue);
 }
 
 @keyframes spin {
