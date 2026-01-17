@@ -7,7 +7,7 @@ import Modal from "./Modal";
 import FloatingLabelInput from "./FloatingLabelInput";
 import warningLogo from "../assets/warning.png";
 
-export default function UserProfile({ loggedInUser }) {
+export default function UserProfile({ loggedInUser, detailsEdited }) {
   const { user_id } = useParams();
   const [user, setUser] = useState();
   const [isLoading, setIsLoading] = useState(true);
@@ -93,7 +93,9 @@ export default function UserProfile({ loggedInUser }) {
         setSurname("");
         setEmail("");
         setPhone("");
+
         setTrackUpdates(trackUpdates + 1);
+        detailsEdited();
       }
     } else {
       console.log("no fields changed");

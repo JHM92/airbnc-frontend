@@ -9,6 +9,7 @@ import { useState, useEffect } from "react";
 
 function App() {
   const [user, setUser] = useState();
+  const [detailsUpdated, setDetailsUpdated] = useState(0);
   const userID = 1;
   const fetchUser = async () => {
     const { user } = await getUserById(userID);
@@ -17,15 +18,22 @@ function App() {
 
   useEffect(() => {
     fetchUser();
-  }, []);
+  }, [detailsUpdated]);
+
+  const detailsEdited = () => {
+    setDetailsUpdated(detailsUpdated + 1);
+  };
 
   return (
     <>
-      <Header user={user} />
+      <Header user={user} detailsUpdated={detailsUpdated} />
       <Routes>
         <Route path="/" element={<ViewProperties user={user} />} />
         <Route path="properties/:property_id" element={<ViewSingleProperty user={user} />} />
-        <Route path="users/:user_id" element={<UserProfile loggedInUser={user} />} />
+        <Route
+          path="users/:user_id"
+          element={<UserProfile loggedInUser={user} detailsEdited={detailsEdited} />}
+        />
       </Routes>
     </>
   );
