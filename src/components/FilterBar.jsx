@@ -3,6 +3,7 @@ import { useSearchParams } from "react-router";
 import CheckboxOption from "./CheckboxOption";
 import { getProperties } from "../../api";
 import searchIcon from "../assets/search-logo.png";
+import FloatingLabelInput from "./FloatingLabelInput";
 
 export default function FilterBar({ updateFilter }) {
   const [propertyTypeInput, setPropertyTypeInput] = useState({
@@ -110,66 +111,64 @@ export default function FilterBar({ updateFilter }) {
   };
 
   return (
-    <form className="filter-bar">
-      <div className="property-types-wrapper">
-        <div>Property Types</div>
-        <div className="property-type-options">
-          <CheckboxOption
-            prompt="property-type"
-            option="house"
-            handlePropertyTypeChange={handlePropertyTypeChange}
-          />
-          <CheckboxOption
-            prompt="property-type"
-            option="apartment"
-            handlePropertyTypeChange={handlePropertyTypeChange}
-          />
-          <CheckboxOption
-            prompt="property-type"
-            option="studio"
-            handlePropertyTypeChange={handlePropertyTypeChange}
-          />
+    <>
+      <hr className="filter-bar-divider" />
+      <form className="filter-bar">
+        <div className="property-types-wrapper">
+          <div>Property Types</div>
+          <div className="property-type-options">
+            <CheckboxOption
+              prompt="property-type"
+              option="house"
+              handlePropertyTypeChange={handlePropertyTypeChange}
+            />
+            <CheckboxOption
+              prompt="property-type"
+              option="apartment"
+              handlePropertyTypeChange={handlePropertyTypeChange}
+            />
+            <CheckboxOption
+              prompt="property-type"
+              option="studio"
+              handlePropertyTypeChange={handlePropertyTypeChange}
+            />
+          </div>
         </div>
-      </div>
 
-      <div className="sort-by-wrapper">
-        <label htmlFor="sort-by">Sort By</label>
-        <select name="sort-by" id="sort-by" onChange={handleSortByChange}>
-          <option value="popularity-descending">Popularity: High to Low</option>
-          <option value="popularity-ascending">Popularity: Low to High</option>
-          <option value="price-descending">Price: High to Low</option>
-          <option value="price-ascending">Price: Low to High</option>
-        </select>
-      </div>
-
-      <div className="price-range-wrapper">
-        <div className="filter-min-price">
-          <label htmlFor="min-price">Minimum Price: £</label>
-          <input
-            className="price-input"
-            type="text"
-            id="min-price"
-            name="min-price"
-            onChange={handleMinPriceChange}
-          />
+        <div className="sort-by-wrapper">
+          <label htmlFor="sort-by">Sort By</label>
+          <select name="sort-by" id="sort-by" onChange={handleSortByChange}>
+            <option value="popularity-descending">Popularity: High to Low</option>
+            <option value="popularity-ascending">Popularity: Low to High</option>
+            <option value="price-descending">Price: High to Low</option>
+            <option value="price-ascending">Price: Low to High</option>
+          </select>
         </div>
-        <div className="filter-max-price">
-          <label htmlFor="max-price">Maximum Price: £</label>
-          <input
-            className="price-input"
-            type="text"
-            id="max-price"
-            name="max-price"
-            onChange={handleMaxPriceChange}
-          />
+        <div className="price-range-wrapper">
+          Price Range
+          <div className="min-max-price-inputs">
+            <FloatingLabelInput
+              label="Minimum Price (£)"
+              width="130"
+              onChange={handleMinPriceChange}
+              field={minPriceInput}
+            />
+            <FloatingLabelInput
+              label="Maximum Price (£)"
+              width="130"
+              onChange={handleMaxPriceChange}
+              field={maxPriceInput}
+            />
+          </div>
         </div>
-      </div>
 
-      <div className="filter-search-wrapper">
-        <button className="filter-bar-button" type="button" onClick={handleFilterSubmit}>
-          <img src={searchIcon} alt="" />
-        </button>
-      </div>
-    </form>
+        <div className="filter-search-wrapper">
+          <button className="filter-bar-button" type="button" onClick={handleFilterSubmit}>
+            <img src={searchIcon} alt="" />
+          </button>
+        </div>
+      </form>
+      <hr className="filter-bar-divider" />
+    </>
   );
 }
