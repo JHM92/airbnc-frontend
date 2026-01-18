@@ -13,6 +13,7 @@ export default function UserProfile({ loggedInUser, detailsEdited }) {
   const [user, setUser] = useState();
   const [isLoading, setIsLoading] = useState(true);
   const [favouritedProperties, setFavouritedProperties] = useState();
+  const [updatedDetails, setUpdatedDetails] = useState({});
   const [updateDetailsModalIsOpen, setUpdateDetailsModalIsOpen] = useState(false);
   const [confirmUpdateModalIsOpen, setConfirmUpdateModalIsOpen] = useState(false);
   const [trackUpdates, setTrackUpdates] = useState(0);
@@ -72,44 +73,46 @@ export default function UserProfile({ loggedInUser, detailsEdited }) {
   };
 
   const handleUpdateDetailsClicked = () => {
-    setConfirmUpdateModalIsOpen(true);
-  };
-
-  const handleConfirmUpdateDetailsClicked = async () => {
-    const updatedDetails = {};
+    const newDetails = {};
 
     if (firstName !== "") {
-      updatedDetails["first_name"] = firstName;
+      newDetails["first_name"] = firstName;
     }
 
     if (surname !== "") {
-      updatedDetails["surname"] = surname;
+      newDetails["surname"] = surname;
     }
 
     if (email !== "") {
-      updatedDetails["email"] = email;
+      newDetails["email"] = email;
     }
 
     if (phone !== "") {
-      updatedDetails["phone"] = phone;
+      newDetails["phone"] = phone;
     }
 
-    if (Object.keys(updatedDetails).length !== 0) {
-      const res = await patchUserDetails(user.user_id, updatedDetails);
-
-      if (res.status === 200) {
-        setConfirmUpdateModalIsOpen(false);
-        setUpdateDetailsModalIsOpen(false);
-        setFirstname("");
-        setSurname("");
-        setEmail("");
-        setPhone("");
-
-        setTrackUpdates(trackUpdates + 1);
-        detailsEdited();
-      }
+    if (Object.keys(newDetails).length !== 0) {
+      setUpdatedDetails(newDetails);
+      setConfirmUpdateModalIsOpen(true);
     } else {
-      console.log("no fields changed");
+      const updateDetailsWarning = document.getElementById("update-details-warning");
+      updateDetailsWarning.className = "";
+    }
+  };
+
+  const handleConfirmUpdateDetailsClicked = async () => {
+    const res = await patchUserDetails(user.user_id, updatedDetails);
+
+    if (res.status === 200) {
+      setConfirmUpdateModalIsOpen(false);
+      setUpdateDetailsModalIsOpen(false);
+      setFirstname("");
+      setSurname("");
+      setEmail("");
+      setPhone("");
+
+      setTrackUpdates(trackUpdates + 1);
+      detailsEdited();
     }
   };
 
@@ -177,6 +180,10 @@ export default function UserProfile({ loggedInUser, detailsEdited }) {
                           onChange={handlePhoneInputChange}
                           field={phone}
                         />
+                      </div>
+
+                      <div id="update-details-warning" className="hidden">
+                        Fields must be edited before updating
                       </div>
 
                       <div className="confirm-update-buttons-container">

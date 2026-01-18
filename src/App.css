@@ -771,6 +771,12 @@ hr {
   align-items: center;
 }
 
+#update-details-warning {
+  margin-top: 10%;
+  text-align: center;
+  color: red;
+}
+
 .confirm-update-buttons-container {
   margin-top: 10%;
   margin-bottom: 3%;
