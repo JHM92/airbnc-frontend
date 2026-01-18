@@ -82,7 +82,7 @@ export default function ViewSingleProperty({ user }) {
           <br />
 
           <div className="view-host-other-properties">
-            <div className="other-properties-heading">Other Properties From Host</div>
+            <div className="section-heading">Other Properties From Host</div>
             <PropertyGrid properties={otherProperties} />
           </div>
         </>

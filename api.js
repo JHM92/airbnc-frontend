@@ -60,3 +60,32 @@ export const patchUserDetails = async (user_id, details) => {
   const res = await axios.patch(`https://airbnc-cm8h.onrender.com/api/users/${user_id}`, details);
   return res;
 };
+
+export const getFavouritedProperties = async (user_id) => {
+  const favouritedProperties = await getProperties("").then((properties) => {
+    return Promise.all(
+      properties.map(async (p) => {
+        return await axios
+          .get(
+            `https://airbnc-cm8h.onrender.com/api/properties/${p.property_id}?user_id=${user_id}`
+          )
+          .then(({ data: { property } }) => {
+            if (property.favourited) {
+              return Promise.resolve(property);
+            }
+            return;
+          });
+      })
+    )
+      .then((values) => {
+        return values.filter((value) => {
+          return typeof value !== "undefined";
+        });
+      })
+      .then((values) => {
+        return values;
+      });
+  });
+
+  return favouritedProperties;
+};

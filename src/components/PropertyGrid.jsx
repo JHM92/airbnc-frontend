@@ -4,6 +4,7 @@ import PropertyCard from "./PropertyCard";
 import { Link } from "react-router";
 
 export default function PropertyGrid({ properties }) {
+  console.log(properties);
   return (
     <div className="properties-grid">
       {typeof properties !== "undefined" &&
