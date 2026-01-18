@@ -5,7 +5,14 @@ import ReviewForm from "./ReviewForm";
 import AllReviews from "./AllReviews";
 import writeReviewIcon from "../assets/write-review.png";
 
-export default function Reviews({ reviews, user, property_id, trackDeletedReviews }) {
+export default function Reviews({
+  reviews,
+  user,
+  property_id,
+  host_id,
+  trackDeletedReviews,
+  trackPostedReviews,
+}) {
   const displayedReviews = [];
 
   const [writeReviewModalIsOpen, setWriteReviewModalIsOpen] = useState(false);
@@ -133,7 +140,13 @@ export default function Reviews({ reviews, user, property_id, trackDeletedReview
     <>
       <div className="view-single-property-reviews-container">
         {displayedReviews.length === 0 ? (
-          <div className="no-reviews">Be the first to review this property!</div>
+          user.user_id !== host_id ? (
+            <div className="no-reviews">Be the first to review this property!</div>
+          ) : (
+            <>
+              <div className="no-reviews">No reviews on your property yet</div>
+            </>
+          )
         ) : (
           displayedReviews.map((review) => {
             return (
@@ -181,36 +194,41 @@ export default function Reviews({ reviews, user, property_id, trackDeletedReview
         <></>
       )}
 
-      <div className="add-review-container">
-        Add a Review?
-        <button
-          className="review-button"
-          onClick={(e) => {
-            setWriteReviewModalIsOpen(true);
-            e.stopPropagation();
-          }}
-        >
-          <img className="write-review-icon" src={writeReviewIcon} alt="" />
-        </button>
-        <Modal
-          open={writeReviewModalIsOpen}
-          onClose={() => {
-            setWriteReviewModalIsOpen(false);
-          }}
-        >
-          <ReviewForm
-            selectStarRating={selectStarRating}
-            stars={stars}
-            reviewMessage={reviewMessage}
-            updateReviewMessage={updateReviewMessage}
-            user={user}
-            property_id={property_id}
+      {user.user_id !== host_id ? (
+        <div className="add-review-container">
+          Add a Review?
+          <button
+            className="review-button"
+            onClick={(e) => {
+              setWriteReviewModalIsOpen(true);
+              e.stopPropagation();
+            }}
+          >
+            <img className="write-review-icon" src={writeReviewIcon} alt="" />
+          </button>
+          <Modal
+            open={writeReviewModalIsOpen}
             onClose={() => {
               setWriteReviewModalIsOpen(false);
             }}
-          />
-        </Modal>
-      </div>
+          >
+            <ReviewForm
+              selectStarRating={selectStarRating}
+              stars={stars}
+              reviewMessage={reviewMessage}
+              updateReviewMessage={updateReviewMessage}
+              trackPostedReviews={trackPostedReviews}
+              user={user}
+              property_id={property_id}
+              onClose={() => {
+                setWriteReviewModalIsOpen(false);
+              }}
+            />
+          </Modal>
+        </div>
+      ) : (
+        <></>
+      )}
     </>
   );
 }

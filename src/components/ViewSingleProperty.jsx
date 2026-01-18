@@ -11,6 +11,7 @@ import Modal from "./Modal";
 export default function ViewSingleProperty({ user }) {
   const [property, setProperty] = useState();
   const [reviews, setReviews] = useState();
+  const [postedReviews, setPostedReviews] = useState(0);
   const [deletedReviews, setDeletedReviews] = useState(0);
   const [otherProperties, setOtherProperties] = useState();
   const [isLoading, setIsLoading] = useState(true);
@@ -43,12 +44,16 @@ export default function ViewSingleProperty({ user }) {
     setDeletedReviews(deletedReviews + 1);
   };
 
+  const trackPostedReviews = () => {
+    setPostedReviews(postedReviews + 1);
+  };
+
   useEffect(() => {
     setIsLoading(true);
     Promise.all([fetchReviewsById(), fetchPropertyById()]).then(([_, host_id]) => {
       fetchHostsOtherProperties(host_id);
     });
-  }, [property_id, deletedReviews]);
+  }, [property_id, deletedReviews, postedReviews]);
 
   if (reviews?.average_rating !== "No Ratings") {
     dateString = new Date(reviews?.reviews[0].created_at).toLocaleString("en-US", {
@@ -79,6 +84,8 @@ export default function ViewSingleProperty({ user }) {
             reviews={reviews}
             property_id={property_id}
             user={user}
+            host_id={property.host_id}
+            trackPostedReviews={trackPostedReviews}
             trackDeletedReviews={trackDeletedReviews}
           />
 

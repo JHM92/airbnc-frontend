@@ -7,6 +7,7 @@ export default function ReviewForm({
   stars,
   reviewMessage,
   updateReviewMessage,
+  trackPostedReviews,
   property_id,
   user,
   onClose,
@@ -81,7 +82,7 @@ export default function ReviewForm({
       </div>
 
       {reviewIsPosted ? (
-        <button className="close-review-button" onClick={onClose}>
+        <button className="close-review-button" onClick={trackPostedReviews}>
           Close
         </button>
       ) : (
