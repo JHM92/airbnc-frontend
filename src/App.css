@@ -235,6 +235,13 @@ a {
   background-color: var(--light-blue);
 }
 
+.view-single-property-name-favourite-wrapper {
+  display: flex;
+  width: 105%;
+  justify-content: space-between;
+  align-items: center;
+}
+
 .view-single-property-name {
   margin: 0;
   font-size: xx-large;

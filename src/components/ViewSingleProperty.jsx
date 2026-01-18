@@ -19,7 +19,7 @@ export default function ViewSingleProperty({ user }) {
   const { property_id } = useParams();
 
   const fetchPropertyById = async () => {
-    const retrievedProperty = await getPropertyById(property_id);
+    const retrievedProperty = await getPropertyById(property_id, user.user_id);
     setProperty(retrievedProperty);
 
     return retrievedProperty.host_id;

@@ -1,13 +1,46 @@
 import HostedBy from "./HostedBy";
 import PropertyDetailsCardGrid from "./PropertyDetailsCardGrid";
+import starIcon from "../assets/star.png";
+import { useState } from "react";
 
 export default function PropertyDetails({ property, reviews }) {
+  const [isFavourited, setIsFavourited] = useState(property.favourited);
+  const initialFavouritedStyling = () => {
+    if (isFavourited) {
+      return "star-filled favourite";
+    } else return "star favourite";
+  };
+
+  const handleFavouritedButtonClicked = () => {
+    setIsFavourited(!isFavourited);
+
+    const favouritedIcon = document.getElementsByClassName("favourite")[0];
+
+    if (isFavourited) {
+      favouritedIcon.className = "star favourite";
+    } else {
+      favouritedIcon.className = "star-filled favourite";
+    }
+  };
+
   return (
     <div className="view-single-property-grid">
       <img src={property?.images[0]} className="view-single-property-main-image" />
+
       <div className="view-single-property-header">
         <div className="view-single-property-name-location-wrapper">
-          <h1 className="view-single-property-name">{property?.property_name}</h1>
+          <div className="view-single-property-name-favourite-wrapper">
+            <h1 className="view-single-property-name">{property?.property_name}</h1>
+            <img
+              className={initialFavouritedStyling()}
+              height="25"
+              width="25"
+              src={starIcon}
+              alt=""
+              onClick={handleFavouritedButtonClicked}
+            />
+          </div>
+
           <span className="view-single-property-location">{property?.location}</span>
         </div>
         <HostedBy

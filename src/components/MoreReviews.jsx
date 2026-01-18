@@ -27,11 +27,7 @@ export default function MoreReviews({
         />
       </div>
 
-      <div className="review-comment">
-        {comment}
-        <br />
-        {review_id}
-      </div>
+      <div className="review-comment">{comment}</div>
 
       <div className="more-reviews-rating">{<StarRating rating={rating} />}</div>
       <div className="review-divider">

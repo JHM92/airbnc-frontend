@@ -93,7 +93,7 @@ export default function UserProfile({ loggedInUser, detailsEdited }) {
     if (phone !== "") {
       updatedDetails["phone"] = phone;
     }
-    console.log(updatedDetails);
+
     if (Object.keys(updatedDetails).length !== 0) {
       const res = await patchUserDetails(user.user_id, updatedDetails);
 
