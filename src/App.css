@@ -1,5 +1,5 @@
 :root {
-  --main-bg-color: #edf6f9;
+  --main-bg-color: #fff;
   --light-blue: #83c5be;
   --dark-blue: #006d77;
   --red: rgb(206, 96, 96);
@@ -41,16 +41,11 @@ body {
 }
 
 .header-logo {
-  width: 10%;
   text-align: left;
 }
 
 .h1-header-logo {
   all: unset;
-}
-
-.logo-image {
-  height: 100%;
 }
 
 .header-user {
@@ -117,6 +112,7 @@ body {
 
 #sort-by {
   color: var(--dark-blue);
+  background-color: #fff;
   border: 3px double var(--light-blue);
   margin-top: 10px;
   border-radius: 5px;
@@ -459,14 +455,17 @@ hr {
   align-items: center;
 }
 
-.view-more-reviews {
-  all: unset;
-  font-size: 0.9rem;
-  font-weight: bold;
+.view-more-reviews-container {
   width: 86%;
   margin-bottom: 2%;
   display: block;
   text-align: end;
+}
+
+.view-more-reviews {
+  all: unset;
+  font-size: 0.9rem;
+  font-weight: bold;
 }
 
 .view-more-reviews:hover {
@@ -512,9 +511,9 @@ hr {
   border-radius: 5px;
 }
 
-.close-modal {
-  display: block;
-  text-align: end;
+.close-modal-wrapper {
+  display: flex;
+  justify-content: end;
   margin-right: 5px;
   font-weight: bold;
   font-size: 1.2rem;
@@ -796,6 +795,10 @@ hr {
 
 .submit-updated-details-button:hover {
   border: solid 2px var(--light-blue);
+}
+
+.no-favourited-properties {
+  text-align: center;
 }
 
 @keyframes spin {

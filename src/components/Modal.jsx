@@ -29,12 +29,15 @@ export default function Modal({ open, children, onClose }) {
           e.preventDefault();
         }}
       >
-        <span className="close-modal" onClick={onClose}>
-          x
-        </span>
+        <div className="close-modal-wrapper">
+          <span className="close-modal" onClick={onClose}>
+            x
+          </span>
+        </div>
+
         {children}
       </div>
     </>,
-    document.getElementById("portal")
+    document.getElementById("portal"),
   );
 }

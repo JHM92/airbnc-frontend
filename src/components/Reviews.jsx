@@ -175,7 +175,7 @@ export default function Reviews({
               e.stopPropagation();
             }}
           >
-            More reviews
+            <span>More reviews</span>
           </button>
           <Modal
             open={viewMoreReviewsModalIsOpen}

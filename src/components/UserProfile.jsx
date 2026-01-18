@@ -34,6 +34,7 @@ export default function UserProfile({ loggedInUser, detailsEdited }) {
       property.image_url = property.images[0];
     });
     setFavouritedProperties(properties);
+    console.log(properties);
   };
 
   const memberSince = new Date(user?.created_at).toLocaleDateString("en-US", {
@@ -183,7 +184,7 @@ export default function UserProfile({ loggedInUser, detailsEdited }) {
                       </div>
 
                       <div id="update-details-warning" className="hidden">
-                        Fields must be edited before updating
+                        A field must be edited before updating
                       </div>
 
                       <div className="confirm-update-buttons-container">
@@ -241,9 +242,17 @@ export default function UserProfile({ loggedInUser, detailsEdited }) {
           {Number(loggedInUser?.user_id) === Number(user_id) ? (
             <>
               <div className="section-heading">Your Favourited Properties</div>
-              <div className="favourited-properties-container">
-                <PropertyGrid properties={favouritedProperties} />
-              </div>
+              {favouritedProperties?.length !== 0 ? (
+                <>
+                  <div className="favourited-properties-container">
+                    <PropertyGrid properties={favouritedProperties} />
+                  </div>{" "}
+                </>
+              ) : (
+                <div className="no-favourited-properties">
+                  You haven't favourited any properties yet
+                </div>
+              )}
               <hr />
             </>
           ) : (
