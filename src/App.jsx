@@ -10,7 +10,7 @@ import { useState, useEffect } from "react";
 function App() {
   const [user, setUser] = useState();
   const [detailsUpdated, setDetailsUpdated] = useState(0);
-  const userID = 2;
+  const userID = 1;
   const fetchUser = async () => {
     const { user } = await getUserById(userID);
     setUser(user);

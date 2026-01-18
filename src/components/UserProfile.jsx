@@ -28,7 +28,7 @@ export default function UserProfile({ loggedInUser, detailsEdited }) {
   };
 
   const fetchFavouritedProperties = async () => {
-    const properties = await getFavouritedProperties(2);
+    const properties = await getFavouritedProperties(loggedInUser.user_id);
     properties.map((property) => {
       property.image_url = property.images[0];
     });

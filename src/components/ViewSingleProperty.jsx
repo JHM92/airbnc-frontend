@@ -64,7 +64,12 @@ export default function ViewSingleProperty({ user }) {
         <p>Loading...</p>
       ) : (
         <>
-          <PropertyDetails property={property} reviews={reviews} isLoading={isLoading} />
+          <PropertyDetails
+            property={property}
+            reviews={reviews}
+            isLoading={isLoading}
+            user={user}
+          />
 
           <br />
           <br />

@@ -8,23 +8,31 @@ export const getProperties = async (optionalQuery) => {
   return properties;
 };
 
-export const getPropertyById = async (property_id) => {
+export const getPropertyById = async (property_id, user_id) => {
+  let optionalQuery = "";
+
+  if (user_id > 0) {
+    optionalQuery = `?user_id=${user_id}`;
+  }
+
   const {
     data: { property },
-  } = await axios.get(`https://airbnc-cm8h.onrender.com/api/properties/${property_id}`);
+  } = await axios.get(
+    `https://airbnc-cm8h.onrender.com/api/properties/${property_id}/${optionalQuery}`,
+  );
   return property;
 };
 
 export const getReviewsById = async (property_id) => {
   const { data: reviewsData } = await axios.get(
-    `https://airbnc-cm8h.onrender.com/api/properties/${property_id}/reviews`
+    `https://airbnc-cm8h.onrender.com/api/properties/${property_id}/reviews`,
   );
   return reviewsData;
 };
 
 export const getPropertiesByHostId = async (host_id) => {
   const { data: properties } = await axios.get(
-    `https://airbnc-cm8h.onrender.com/api/properties?host=${host_id}`
+    `https://airbnc-cm8h.onrender.com/api/properties?host=${host_id}`,
   );
   return properties;
 };
@@ -44,7 +52,7 @@ export const postPropertyReview = async (guest_id, rating, comment, property_id)
 
   const res = await axios.post(
     `https://airbnc-cm8h.onrender.com/api/properties/${property_id}/reviews`,
-    payload
+    payload,
   );
 
   return res;
@@ -56,7 +64,6 @@ export const deleteReviewById = async (review_id) => {
 };
 
 export const patchUserDetails = async (user_id, details) => {
-  console.log(details);
   const res = await axios.patch(`https://airbnc-cm8h.onrender.com/api/users/${user_id}`, details);
   return res;
 };
@@ -67,7 +74,7 @@ export const getFavouritedProperties = async (user_id) => {
       properties.map(async (p) => {
         return await axios
           .get(
-            `https://airbnc-cm8h.onrender.com/api/properties/${p.property_id}?user_id=${user_id}`
+            `https://airbnc-cm8h.onrender.com/api/properties/${p.property_id}?user_id=${user_id}`,
           )
           .then(({ data: { property } }) => {
             if (property.favourited) {
@@ -75,7 +82,7 @@ export const getFavouritedProperties = async (user_id) => {
             }
             return;
           });
-      })
+      }),
     )
       .then((values) => {
         return values.filter((value) => {
@@ -88,4 +95,21 @@ export const getFavouritedProperties = async (user_id) => {
   });
 
   return favouritedProperties;
+};
+
+export const addToFavourites = async (user_id, property_id) => {
+  const payload = { guest_id: user_id };
+  const res = await axios.post(
+    `https://airbnc-cm8h.onrender.com/api/properties/${property_id}/favourite`,
+    payload,
+  );
+
+  return res;
+};
+
+export const deleteFromFavourites = async (user_id, property_id) => {
+  const res = await axios.delete(
+    `https://airbnc-cm8h.onrender.com/api/properties/${property_id}/users/${user_id}/favourite`,
+  );
+  return res;
 };

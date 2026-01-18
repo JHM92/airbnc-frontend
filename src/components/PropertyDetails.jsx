@@ -2,8 +2,9 @@ import HostedBy from "./HostedBy";
 import PropertyDetailsCardGrid from "./PropertyDetailsCardGrid";
 import starIcon from "../assets/star.png";
 import { useState } from "react";
+import { addToFavourites, deleteFromFavourites } from "../../api";
 
-export default function PropertyDetails({ property, reviews }) {
+export default function PropertyDetails({ property, reviews, user }) {
   const [isFavourited, setIsFavourited] = useState(property.favourited);
   const initialFavouritedStyling = () => {
     if (isFavourited) {
@@ -11,15 +12,15 @@ export default function PropertyDetails({ property, reviews }) {
     } else return "star favourite";
   };
 
-  const handleFavouritedButtonClicked = () => {
-    setIsFavourited(!isFavourited);
-
+  const handleFavouritedButtonClicked = async () => {
     const favouritedIcon = document.getElementsByClassName("favourite")[0];
-
+    setIsFavourited(!isFavourited);
     if (isFavourited) {
       favouritedIcon.className = "star favourite";
+      const res = await deleteFromFavourites(user.user_id, property.property_id);
     } else {
       favouritedIcon.className = "star-filled favourite";
+      const res = await addToFavourites(user.user_id, property.property_id);
     }
   };
 
