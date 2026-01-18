@@ -1,16 +1,32 @@
-# React + Vite
+# Dwellr
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Short term property rental desktop web app built with React.
 
-Currently, two official plugins are available:
+# Please note:
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- The backend is hosted on a Render's free tier. If the service is inactive for 15 minutes it will go to sleep. It can take around a minute to wake up, so when loading the homepage, it might take some time to load information from the backend.
+- User_id is hardcoded to 1
+- No responsive design yet so won't display correctly on smaller screens. App was designed on 1920 x 1080 monitor.
 
-## React Compiler
+# Routes
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+# /
 
-## Expanding the ESLint configuration
+- Users can browse properties
+- Filter based on property type, and price range
+- Sort properties by popularity or price.
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+# /properties/:id
+
+- Users can view more information about a property
+- See reviews for the property
+- Write a review for the property
+- Delete reviews written by you
+- Add or remove property to favourites
+- View other properties belonging to the host
+
+# /users/:id
+
+- Users can view information about other users
+- Edit their own details
+- View favourited properties
